@@ -2,7 +2,9 @@ const express = require('express')
 const { engine } = require('express-handlebars')
 const app = express()
 const port = 3000
+const restaurants = require('./public/jsons/restaurant.json').results
 
+//Ｖ(view)負責畫面的呈現
 app.engine('.hbs', engine({extname : '.hbs'}))
 app.set('view engine', '.hbs')
 app.set('views', './views')
@@ -11,12 +13,13 @@ app.set('views', './views')
 app.use(express.static('public'))
 
 
+
 //C 架構的中間人（先處理）
 app.get('/', (req, res) => {
   res.redirect('/restaurant')
 })
 app.get('/restaurant', (req, res) => {
-  res.render('index')
+  res.render('index',{restaurants})
 })
 app.get('/restaurant/:id', (req, res) => {
   const id = req.params.id
