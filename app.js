@@ -2,7 +2,12 @@ const express = require('express')
 const { engine } = require('express-handlebars')
 const app = express()
 const port = 3000
+//載入restaurant.json
 const restaurants = require('./public/jsons/restaurant.json').results
+
+
+
+
 
 //Ｖ(view)負責畫面的呈現
 app.engine('.hbs', engine({extname : '.hbs'}))
