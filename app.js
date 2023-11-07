@@ -23,9 +23,21 @@ app.use(express.static('public'))
 app.get('/', (req, res) => {
   res.redirect('/restaurant')
 })
-app.get('/restaurant', (req, res) => {
-  res.render('index',{restaurants})
+app.get('/restaurant',(req,res)=>{
+  const keyword = req.query.keyword?.trim() ;
+  const matchedRestaurant = keyword ? 
+  restaurants.filter(restaurant => {
+  return restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || restaurant.category.includes(keyword)
+  }
+  )
+  : restaurants ;
+  if (matchedRestaurant.length===0){
+    res.render('empty',{keyword})
+  }else
+  res.render('index',{restaurants:matchedRestaurant,keyword})
+  
 })
+
 app.get('/restaurant/:id', (req, res) => {
   const id = Number(req.params.id)
   const restaurant = restaurants.find((res) => res.id === id)
