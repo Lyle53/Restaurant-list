@@ -1,5 +1,5 @@
 # 餐廳清單
-<p><img src="https://github.com/Lyle53/Restaurant-list/upload/main" alt="MyImage" /></p>	
+![image](Untitled.png)
 ---
 
 # Function
